@@ -20,6 +20,12 @@ export default function Navbar() {
       <li>
         <Link href={"/contact"}>Contact</Link>
       </li>
+      <li>
+        <Link href={"/register"}>Register</Link>
+      </li>
+      <li>
+        <Link href={"/login"}>Login</Link>
+      </li>
     </>
   );
   return (

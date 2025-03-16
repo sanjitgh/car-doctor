@@ -6,7 +6,7 @@ export default async function ServiceDetailsPage({ params }) {
   const data = await dbConnect(collectionNameObj.servicesCollection).findOne({
     _id: new ObjectId(params.id),
   });
-  console.log(data);
+
   return (
     <div className="py-10">
       <div className="container mx-auto px-3">
