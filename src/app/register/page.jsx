@@ -1,6 +1,7 @@
 "use client";
 
 import { registerUser } from "../actions/auth/registerUser";
+import SocialLogin from "../login/components/SocialLogin";
 
 export default function RegisterPage() {
   const handleSubmit = async (e) => {
@@ -41,6 +42,7 @@ export default function RegisterPage() {
             </button>
           </div>
         </form>
+        <SocialLogin />
       </div>
     </div>
   );

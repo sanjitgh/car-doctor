@@ -1,8 +1,13 @@
+"use client";
 import Link from "next/link";
 import logo from "@/images/assets/logo.svg";
 import Image from "next/image";
+import { useSession } from "next-auth/react";
+import { signOut } from "next-auth/react";
 
 export default function Navbar() {
+  const { data: session, status } = useSession();
+
   const links = (
     <>
       <li>
@@ -20,12 +25,32 @@ export default function Navbar() {
       <li>
         <Link href={"/contact"}>Contact</Link>
       </li>
-      <li>
-        <Link href={"/register"}>Register</Link>
-      </li>
-      <li>
-        <Link href={"/login"}>Login</Link>
-      </li>
+      {status == "authenticated" ? (
+        <>
+          <li>
+            <Link onClick={() => signOut()} href={""}>
+              Logout
+            </Link>
+          </li>
+          <li>
+            <Image
+              src={session?.user?.image}
+              width={50}
+              height={50}
+              alt="profile image"
+            />
+          </li>
+        </>
+      ) : (
+        <>
+          <li>
+            <Link href={"/register"}>Register</Link>
+          </li>
+          <li>
+            <Link href={"/login"}>Login</Link>
+          </li>
+        </>
+      )}
     </>
   );
   return (
