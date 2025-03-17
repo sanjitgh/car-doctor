@@ -25,6 +25,9 @@ export default function Navbar() {
       <li>
         <Link href={"/contact"}>Contact</Link>
       </li>
+      <li>
+        <Link href={"/my-bookings"}>Booking</Link>
+      </li>
       {status == "authenticated" ? (
         <>
           <li>

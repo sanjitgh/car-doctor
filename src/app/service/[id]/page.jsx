@@ -1,12 +1,9 @@
-import dbConnect, { collectionNameObj } from "@/lib/dbConnect";
-import { ObjectId } from "mongodb";
 import Image from "next/image";
+import Link from "next/link";
 
 export default async function ServiceDetailsPage({ params }) {
-  const data = await dbConnect(collectionNameObj.servicesCollection).findOne({
-    _id: new ObjectId(params.id),
-  });
-
+  const res = await fetch(`http://localhost:3000/api/service/${params.id}`);
+  const data = await res.json();
   return (
     <div className="py-10">
       <div className="container mx-auto px-3">
@@ -19,7 +16,7 @@ export default async function ServiceDetailsPage({ params }) {
               height={1000}
               className="w-full"
             />
-            <h1>{data.title}</h1>
+            <h1 className="text-2xl my-3">{data.title}</h1>
             <p>{data.description}</p>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
               {data.facility.map((item, idx) => (
@@ -38,9 +35,12 @@ export default async function ServiceDetailsPage({ params }) {
           {/* sidebar */}
           <div className="col-span-3">
             <h1 className="text-2xl font-bold mb-5">Price : $ {data.price}</h1>
-            <button className="btn bg-orange-600 text-white ">
+            <Link
+              href={`/checkout/${data._id}`}
+              className="btn bg-orange-600 text-white "
+            >
               Proceed Checkout
-            </button>
+            </Link>
           </div>
         </div>
       </div>
